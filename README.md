@@ -4,41 +4,80 @@ Computer Vision Project
 =======================
 
 1. Mark object/Give object position
-   1. Input: 1st frame
-   2. Use mouse clicks and the ginput function
-   3. Outputs the top-left and bottom-right corner of the bounding box of the ellipse
-   4. function [tl, br] = getObjectPosition(frame1)
-1. Compute distribution of the object-window - (16 bins per channel - leave as a parameter)
-   1. Takes the n_h pixels inside the window (ellipse inside the rectangle) and computes a histogram
-   2. Input: the rectangular window - the array of pixel values inside the object-window
-   3. Use Epanechnikov kernel to compute the distribution
-   4. Output: The distribution - a 16x16x16 array -- leave the 16 as a parameter
-   5. function hist = computeDistribution(window)
-1. Function to evaluate Bhattacharya coefficient 
-   1. Input: 2 distributions
-   2. Compute the Bhattacharya coefficient using formula (17) from paper
-   3. function coeff = computeBhattacharyaCoefficient(window1, window2)
-1. Function to compute mean-shifted position - (1 iteration of while)
-   1. Input: distributions q_u (from frame i) and p_u(y_0) (from frame i+1), frames i and i+1
-   2. Compute the mean-shifted position using formulae (26) and (25).
-   3. Output the mean-shifted position
-   4. function shiftedPos = computeMeanShiftPosition(frame1, q_u, frame2, p_u)
-1. Function to mark the tracked object 
-   1. Inputs: frame, boundingbox of ellipse
-1. Main function
-   1. Get input, object positions
-   2. For each frame i
-      1. computeDistribution q_u for frame i at y0i with size = original size_i
-      2. computeDistribution p_u for frame i+1 at y0i with size = 90%, 95%, 100%, 105%, 110% of original size
-      3. Create an array to store the final BhattacharyaCoefficients for each object size and another to store the final positions
-      4. Iterate over all p_u s
-         1. While (convergence criteria)
-            1. computeBhattacharyaCoefficient
-            2. computeMeanShiftPosition update
-            3. Step 4 of the algorithm from paper
-            4. Update p_u for this new position
-         1. Store the last computed Bhattacharya coefficient, and the final position in the respective arrays
-      1. Choose that object size which gives the highest coefficient, and get that final position vector
-      2. Display/Store frame i+1
-      3. Save y0(i+1) and original size_(i+1)
-   1. Close video display/Save video to file.
+
+    1. Input: 1st frame
+
+    2. Use mouse clicks and the ginput function
+
+    3. Outputs the top-left and bottom-right corner of the bounding box of the ellipse
+
+    4. function [tl, br] = getObjectPosition(frame1)
+
+2. Compute distribution of the object-window - (16 bins per channel - leave as a parameter)
+
+    5. Takes the n_h pixels inside the window (ellipse inside the rectangle) and computes a histogram
+
+    6. Input: the rectangular window - the array of pixel values inside the object-window
+
+    7. Use Epanechnikov kernel to compute the distribution
+
+    8. Output: The distribution - a 16x16x16 array -- leave the 16 as a parameter
+
+    9. function hist = computeDistribution(window)
+
+3. Function to evaluate Bhattacharya coefficient 
+
+    10. Input: 2 distributions
+
+    11. Compute the Bhattacharya coefficient using formula (17) from paper
+
+    12. function coeff = computeBhattacharyaCoefficient(window1, window2)
+
+4. Function to compute mean-shifted position - (1 iteration of while)
+
+    13. Input: distributions q_u (from frame i) and p_u(y_0) (from frame i+1), frames i and i+1
+
+    14. Compute the mean-shifted position using formulae (26) and (25).
+
+    15. Output the mean-shifted position
+
+    16. function shiftedPos = computeMeanShiftPosition(frame1, q_u, frame2, p_u)
+
+5. Function to mark the tracked object 
+
+    17. Inputs: frame, boundingbox of ellipse
+
+6. Main function
+
+    18. Get input, object positions
+
+    19. For each frame i
+
+        1. computeDistribution q_u for frame i at y0i with size = original size_i
+
+        2. computeDistribution p_u for frame i+1 at y0i with size = 90%, 95%, 100%, 105%, 110% of original size
+
+        3. Create an array to store the final BhattacharyaCoefficients for each object size and another to store the final positions
+
+        4. Iterate over all p_u s
+
+            1. While (convergence criteria)
+
+                1. computeBhattacharyaCoefficient
+
+                2. computeMeanShiftPosition update
+
+                3. Step 4 of the algorithm from paper
+
+                4. Update p_u for this new position
+
+            2. Store the last computed Bhattacharya coefficient, and the final position in the respective arrays
+
+        5. Choose that object size which gives the highest coefficient, and get that final position vector
+
+        6. Display/Store frame i+1
+
+        7. Save y0(i+1) and original size_(i+1)
+
+    20. Close video display/Save video to file.
+
