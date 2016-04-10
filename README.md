@@ -3,7 +3,7 @@ https://docs.google.com/document/d/18DwCtJNNTACFD2C5Xk2myp7AdQSU4xrSu1TXvqUa_7I/
 Computer Vision Project
 =======================
 
-1. Mark object/Give object position
+1. Mark object/Give object position (UNMESH)
 
     1. Input: 1st frame
 
@@ -13,7 +13,7 @@ Computer Vision Project
 
     4. function [tl, br] = getObjectPosition(frame1)
 
-2. Compute distribution of the object-window - (16 bins per channel - leave as a parameter)
+2. Compute distribution of the object-window - (16 bins per channel - leave as a parameter) (UNMESH)
 
     5. Takes the n_h pixels inside the window (ellipse inside the rectangle) and computes a histogram
 
@@ -25,7 +25,7 @@ Computer Vision Project
 
     9. function hist = computeDistribution(window)
 
-3. Function to evaluate Bhattacharya coefficient 
+3. Function to evaluate Bhattacharya coefficient (SIDDHANT)
 
     10. Input: 2 distributions
 
@@ -33,7 +33,7 @@ Computer Vision Project
 
     12. function coeff = computeBhattacharyaCoefficient(window1, window2)
 
-4. Function to compute mean-shifted position - (1 iteration of while)
+4. Function to compute mean-shifted position - (1 iteration of while) (UNMESH)
 
     13. Input: distributions q_u (from frame i) and p_u(y_0) (from frame i+1), frames i and i+1
 
@@ -43,11 +43,11 @@ Computer Vision Project
 
     16. function shiftedPos = computeMeanShiftPosition(frame1, q_u, frame2, p_u)
 
-5. Function to mark the tracked object 
+5. Function to mark the tracked object (SIDDHANT)
 
     17. Inputs: frame, boundingbox of ellipse
 
-6. Main function
+6. Main function (SIDDHANT)
 
     18. Get input, object positions
 
