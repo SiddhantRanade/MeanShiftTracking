@@ -15,6 +15,6 @@ imshow(frame);
 tl= [y(1),x(1)]; %%tl and br are to be outputted in row,column format
 br=[y(2),x(2)];
 mF = markEllipse(frame, tl, br);
-imshow(mF); title('Tracking this region:'); pause(2);
+imshow(mF); title('Tracking this region:'); pause(3.5);
 close(fig)
 end
