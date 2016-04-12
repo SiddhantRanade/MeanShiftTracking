@@ -9,10 +9,11 @@ function [tl,br]= getObjectPosition(frame1)
 %%% point marked in the image by the user.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-figure;
+fig = figure;
 imshow(frame1);
 col_max=size(frame1,2);
 [x,y]=ginput(2);
-tl= [y(1,:),x(1,:)]; %%tl and br are to be outputted in row,column format
-br=[y(2,:),x(2,:)];
+tl= [y(1),x(1)]; %%tl and br are to be outputted in row,column format
+br=[y(2),x(2)];
+close(fig)
 end
