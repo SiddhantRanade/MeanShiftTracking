@@ -1,4 +1,4 @@
-function [tl,br]= getObjectPosition(frame1)
+function [tl,br]= getObjectPosition(frame)
 
 %%% Arguments : x_pixels x y_pixels x 3  array for the image of the first
 %%% frame
@@ -10,10 +10,11 @@ function [tl,br]= getObjectPosition(frame1)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 fig = figure;
-imshow(frame1);
-col_max=size(frame1,2);
+imshow(frame);
 [x,y]=ginput(2);
 tl= [y(1),x(1)]; %%tl and br are to be outputted in row,column format
 br=[y(2),x(2)];
+mF = markEllipse(frame, tl, br);
+imshow(mF); title('Tracking this region:'); pause(2);
 close(fig)
 end

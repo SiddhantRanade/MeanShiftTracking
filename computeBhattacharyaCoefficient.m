@@ -6,7 +6,6 @@ function coeff = computeBhattacharyaCoefficient(d1, d2)
 %%%
 %%% Outputs : coeff: the Bhattacharya coefficient
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 coeff = sum(sqrt(d1(:)).*sqrt(d2(:)));
 end
