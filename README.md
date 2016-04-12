@@ -31,7 +31,7 @@ Computer Vision Project
 
     11. Compute the Bhattacharya coefficient using formula (17) from paper
 
-    12. function coeff = computeBhattacharyaCoefficient(window1, window2)
+    12. function coeff = computeBhattacharyaCoefficient(d1, d2)
 
 4. Function to compute mean-shifted position - (1 iteration of while) (UNMESH)
 

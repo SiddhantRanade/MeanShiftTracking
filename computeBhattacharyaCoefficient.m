@@ -1,13 +1,12 @@
-function coeff = computeBhattacharyaCoefficient(window1, window2)
+function coeff = computeBhattacharyaCoefficient(d1, d2)
 
-%%% Arguments : two windows window1 and window2
-%%% Outputs :
-%%% coeff: the Bhattacharya coefficient
-%%% Uses the computeDistribution function
+%%% Arguments : two distributions d1 and d2 -- arrays of size 16 x 16 x 16,
+%%% the 16 is not fixed yet, it's a tunable parameter inside the
+%%% computeDistribution function
+%%%
+%%% Outputs : coeff: the Bhattacharya coefficient
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-p = computeDistribution(window1);
-q = computeDistribution(window2);
-dp = sqrt(p) .* sqrt(q);
-coeff = sum(dp(:));
+coeff = sum(sqrt(d1(:)).*sqrt(d2(:)));
 end
