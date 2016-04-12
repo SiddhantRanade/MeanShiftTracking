@@ -11,7 +11,8 @@ function [tl,br]= getObjectPosition(frame1)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure;
 imshow(frame1);
+col_max=size(frame1,2);
 [x,y]=ginput(2);
-tl= [x(1,:),y(1,:)];
-br=[x(2,:),y(2,:)];
+tl= [y(1,:),x(1,:)]; %%tl and br are to be outputted in row,column format
+br=[y(2,:),x(2,:)];
 end
