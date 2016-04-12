@@ -11,5 +11,7 @@ function [tl,br]= getObjectPosition(frame1)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure;
 imshow(frame1);
-[tl,br]=ginput(2);
+[x,y]=ginput(2);
+tl= [x(1,:),y(1,:)];
+br=[x(2,:),y(2,:)];
 end
