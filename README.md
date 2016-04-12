@@ -9,9 +9,9 @@ Computer Vision Project
 
     2. Use mouse clicks and the ginput function
 
-    3. Outputs the top-left and bottom-right corner of the bounding box of the ellipse
+    3. Outputs the coordinates of the centre and the radii of the ellipse
 
-    4. function [tl, br] = getObjectPosition(frame1)
+    4. function [centre, radii] = getObjectPosition(frame)
 
 2. Compute distribution of the object-window - (16 bins per channel - leave as a parameter) (UNMESH)
 
@@ -45,7 +45,7 @@ Computer Vision Project
 
 5. Function to mark the tracked object (SIDDHANT)
 
-    17. Inputs: frame, boundingbox of ellipse
+    17. Inputs: frame, centre, radii of ellipse
 
 6. Main function (SIDDHANT)
 

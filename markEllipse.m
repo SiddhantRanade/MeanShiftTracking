@@ -1,4 +1,4 @@
-function markedFrame = markEllipse(frame, tl, br)
+function markedFrame = markEllipse(frame, centre, radii)
 
 %%% Arguments: frame: a video frame
 %%% tl, br: coordinates of top left and bottom right corner
@@ -8,11 +8,13 @@ function markedFrame = markEllipse(frame, tl, br)
 lTh = 3;        %line thickness
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-radii = (br-tl)/2; r1 = radii(1); r2 = radii(2);
-centre = (br+tl)/2; c1 = centre(1); c2 = centre(2);
-[R,C,~] = ndgrid(1:size(frame, 1), 1:size(frame,2), 1:size(frame,3));
-selector1 = (R-c1).^2/r1^2 + (C-c2).^2/r2^2 >= 1;
-selector2 = (R-c1).^2/(r1+lTh)^2 + (C-c2).^2/(r2+lTh)^2 <= 1;
+r1 = radii(1); r2 = radii(2);
+c1 = centre(1); c2 = centre(2);
+rectWindow = frame(c1-r1:c1+r1, c2-r2:c2+r2);
+selector = getEllipse(radii);
+selector(lTh+1:end-lTh,lTh+1:end-lTh) = selector(lTh+1:end-lTh,lTh+1:end-lTh) & ~getEllipse(radii-lTh);
+markedWindow = rectWindow;
+markedWindow(selector) = 255 - rectWindow(selector);
 markedFrame = frame;
-markedFrame(selector1 & selector2) = 255 - markedFrame(selector1 & selector2);
+markedFrame(c1-r1:c1+r1, c2-r2:c2+r2) = markedWindow;
 end
