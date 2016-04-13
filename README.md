@@ -35,7 +35,7 @@ Computer Vision Project
 
 4. Function to compute mean-shifted position - (1 iteration of while) (UNMESH)
 
-    13. Input: distributions q_u (from frame i) and p_u(y_0) (from frame i+1), frames i and i+1
+    13. Input: distributions q_u (from frame i) and p_u(y_0) (from frame i+1), frames i and i+1,y_0,radius in current frame,radius in next frame
 
     14. Compute the mean-shifted position using formulae (26) and (25).
 
