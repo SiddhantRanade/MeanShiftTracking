@@ -23,7 +23,7 @@ Computer Vision Project
 
     8. Output: The distribution - a 16x16x16 array -- leave the 16 as a parameter
 
-    9. function hist = computeDistribution(window)
+    9. function distrib = computeDistribution(window)
 
 3. Function to evaluate Bhattacharya coefficient (SIDDHANT)
 
