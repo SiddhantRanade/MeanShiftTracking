@@ -19,32 +19,32 @@ function shiftedPos = ...
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 BC_current = computeBhattacharyaCoefficient(p_u,q_u);
-c1=y_current(1); %%Y coordinate of y_0
-c2=y_current(2); %% X coordinate of y_0
+c1=y_current(1); %%Y coordinate of y_0(row number)
+c2=y_current(2); %% X coordinate of y_0(column number)
 r1=h_current(1);
 r2=h_current(2);
 %coords = getEllipse(h_current);
 %window = frame1(c1-r1:c1+r1, c2-r2 : c2+r2); %Rectangular window about current location 
-selector = getEllipse(h_current); %Get the ellipse about the current window
-[r,c]=find(selector);  %Obtain indices of entries in the ellipse in [row,column] form
+[selector,r,c] = getEllipse(h_current); %Get the ellipse about the current window
+%[r,c]=find(selector);  %Obtain indices of entries in the ellipse in [row,column] form
 roi_coords=[r,c];      %Region of interest: The points within the ellipse
 roi_coords(:,1)=roi_coords(:,1) + c1; %Translate by y_0 to 
 roi_coords(:,2)=roi_coords(:,2)+c2;   %obtain x_i's in eqn 26 in paper
 
 n_h= size(roi_coords,1);  %The total number of pixels in the ellipse
 
-weights=zeros(n_h,1); 
+wts=zeros(n_h,1); 
 
-normalisation_factor = 2*sum(weights)/pi; %Normalisation factor given by eqn (26) denominator.
+normalisation_factor = 2*sum(wts)/pi; %Normalisation factor given by eqn (26) denominator.
 %%Note that the function 'g' is a constant function. Dimensionality of the
 %%vectors is 2 for which value of 'g' is 2/pi.
 
 for i=1:n_h
     colour = frame1(roi_coords(i,1),roi_coords(i,2),:); %Get the colour of the pixel
     index=ceil(colour/16); %Find the index of the bin(in the histogram) to which the colour belongs
-    weights(i)=sqrt(q_u(index)/p_u(index));  %Formula for weights: eqn(25) in the paper
+    wts(i)=sqrt(q_u(index)/p_u(index));  %Formula for weights: eqn(25) in the paper
     shiftedPos=shiftedPos + ...
-        (roi_coords(i,:)*weights(i)*2/pi)/normalisation_factor; %Mean shifted position
+        (roi_coords(i,:)*wts(i)*2/pi)/normalisation_factor; %Mean shifted position
 end
 C1=shiftedPos(1); C2=shiftedPos(2);
 R1=h_next(1);  %h_next is radius in the next window
@@ -64,9 +64,3 @@ end
 % The BC for the mean shifted position must be greater than the current
 % position . Stop once that is achieved.
 end
-
-    
-
-    
-
-
