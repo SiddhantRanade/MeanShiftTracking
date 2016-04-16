@@ -41,7 +41,7 @@ normalisation_factor = 2*sum(wts)/pi; %Normalisation factor given by eqn (26) de
 
 for i=1:n_h
     colour = frame1(roi_coords(i,1),roi_coords(i,2),:); %Get the colour of the pixel
-    index=ceil(colour/16); %Find the index of the bin(in the histogram) to which the colour belongs
+    index=ceil(((colour+1)/256)*16); %Find the index of the bin(in the histogram) to which the colour belongs
     wts(i)=sqrt(q_u(index)/p_u(index));  %Formula for weights: eqn(25) in the paper
     shiftedPos=shiftedPos + ...
         (roi_coords(i,:)*wts(i)*2/pi)/normalisation_factor; %Mean shifted position
