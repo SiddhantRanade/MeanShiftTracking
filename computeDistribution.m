@@ -3,8 +3,10 @@ function distrib = computeDistribution(window)
 %%% Arguments : window: the rectangular patch that encloses the ellipse
 %%%
 %%% Outputs : distrib: the distribution
-nBins = 16;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+global nBins;
+
 sz = size(window);
 h_r = (sz(1)-1)/2;
 h_c = (sz(2)-1)/2;
@@ -14,7 +16,7 @@ rr = rr/h_r; cc = cc/h_r;
 vals = zeros(n_h, size(window,3));
 for ll = 1:size(window,3)
     win = window(:,:,ll);
-    vals(:,ll) = ceil((win(selector)+1)/256*nBins);    % Maps [0,255] to {1..16}
+    vals(:,ll) =getBinIndex(win(selector));    % Maps [0,whiteLevel] to {1..16}
 end
 if(size(window,3) == 1)
     distrib = zeros(nBins,1);
