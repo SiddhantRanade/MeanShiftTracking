@@ -17,6 +17,6 @@ v2=[y(2),x(2)];
 centre = round((v2+v1)/2);
 radii = round(abs(v2-v1)/2);
 mF = markEllipse(frame, centre, radii);
-imshow(mF); title('Tracking this region:'); pause(3.5);
+imshow(mF); title('Tracking this region:');
 close(fig)
 end

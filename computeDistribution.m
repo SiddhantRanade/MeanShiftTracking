@@ -11,8 +11,8 @@ sz = size(window);
 h_r = (sz(1)-1)/2;
 h_c = (sz(2)-1)/2;
 [selector,rr,cc] = getEllipse([h_r,h_c]);       % rr,cc are measured from the centre of the window
-n_h = sum(selector);
-rr = rr/h_r; cc = cc/h_r;
+n_h = sum(selector(:));
+rr = rr/h_r; cc = cc/h_c;
 vals = zeros(n_h, size(window,3));
 for ll = 1:size(window,3)
     win = window(:,:,ll);
