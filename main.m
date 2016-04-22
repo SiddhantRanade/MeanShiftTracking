@@ -1,11 +1,11 @@
 %% Main
 
 global nBins whiteLevel;
-nBins = 16;
+nBins = int32(16);
 whiteLevel = 1;
 
-videoReader = vision.VideoFileReader('video.mp4');
-videoWriter = vision.VideoFileWriter('output.mp4', 'FrameRate', videoReader.info.VideoFrameRate, 'FileFormat', 'MPEG4');
+videoReader = vision.VideoFileReader('vid4.mp4');
+videoWriter = vision.VideoFileWriter('out4.mp4', 'FrameRate', videoReader.info.VideoFrameRate, 'FileFormat', 'MPEG4');
 curFrame = step(videoReader);
 [centre, radii] = getObjectPosition(curFrame);
 curFrameM = markEllipse(curFrame, centre, radii);
@@ -47,7 +47,6 @@ while ~isDone(videoReader)
         end
     end
     [~,ind]=max(coeffs);
-    display(ind);
     centre = positions(ind,:);
     radii = round(radiiRatios(ind) * radii);
     curFrameM = markEllipse(curFrame, centre, radii);

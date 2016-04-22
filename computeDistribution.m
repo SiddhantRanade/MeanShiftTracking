@@ -25,10 +25,12 @@ elseif(size(window,3) == 3)
 else
     error('window size in third dimension is invalid');
 end
-for ii = 1:n_h
-    if(size(window,3) == 1)
+if(size(window,3) == 1)
+    for ii = 1:n_h
         distrib(vals(ii)) = distrib(vals(ii)) + (1-rr(ii)^2-cc(ii)^2);
-    else
+    end
+else
+    for ii = 1:n_h
         distrib(vals(ii,1), vals(ii,2), vals(ii,3)) = ...
             distrib(vals(ii,1), vals(ii,2), vals(ii,3)) + (1-rr(ii)^2-cc(ii)^2);
     end

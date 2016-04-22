@@ -57,5 +57,5 @@ shiftedPos = (wts'*roi_coords(:,:))/normalisation_factor; %Mean shifted position
 %     BC_next = computeBhattacharyaCoefficient(updated_p,q_u);
 % end
 % The BC for the mean shifted position must be greater than the current
-% position . Stop once that is achieved.
+% position. Stop once that is achieved.
 end

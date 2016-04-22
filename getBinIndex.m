@@ -6,6 +6,6 @@ function out = getBinIndex(in)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 global nBins whiteLevel;
-out = ceil(in/whiteLevel*nBins);
+out = ceil(in/whiteLevel*double(nBins));
 out(out == 0) = 1;
 end
