@@ -4,12 +4,12 @@ global nBins whiteLevel;
 nBins = int32(16);
 whiteLevel = 1;
 
-videoReader = vision.VideoFileReader('vid4.mp4');
-videoWriter = vision.VideoFileWriter('out4.mp4', 'FrameRate', videoReader.info.VideoFrameRate, 'FileFormat', 'MPEG4');
+videoReader = vision.VideoFileReader('vid5.mp4');
+videoWriter = vision.VideoFileWriter('out5.mp4', 'FrameRate', videoReader.info.VideoFrameRate, 'FileFormat', 'MPEG4');
 curFrame = step(videoReader);
 [centre, radii] = getObjectPosition(curFrame);
 curFrameM = markEllipse(curFrame, centre, radii);
-videoPlayer = vision.VideoPlayer('Position', [0,size(curFrame,1),size(curFrame,2),size(curFrame,1)]);
+videoPlayer = vision.DeployableVideoPlayer('Size','Full-screen');
 step(videoWriter, curFrameM);
 step(videoPlayer, curFrameM);
 
@@ -50,7 +50,7 @@ while ~isDone(videoReader)
     centre = positions(ind,:);
     radii = round(radiiRatios(ind) * radii);
     curFrameM = markEllipse(curFrame, centre, radii);
-    step(videoWriter, curFrameM);
+%     step(videoWriter, curFrameM);
     step(videoPlayer, curFrameM);
 end
 release(videoWriter);

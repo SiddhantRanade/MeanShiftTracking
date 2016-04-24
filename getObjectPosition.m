@@ -10,13 +10,11 @@ function [centre,radii]= getObjectPosition(frame)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 fig = figure;
-imshow(frame);
-[x,y]=ginput(2);
-v1= [y(1),x(1)]; %%v1 and v2 are to be outputted in row,column format
-v2=[y(2),x(2)];
-centre = round((v2+v1)/2);
-radii = round(abs(v2-v1)/2);
-mF = markEllipse(frame, centre, radii);
-imshow(mF); title('Tracking this region:');
+imshow(frame, 'InitialMagnification', 200);
+h=imellipse;
+wait(h);
+X=getPosition(h);
+centre = round([X(2)+X(4)/2, X(1)+X(3)/2]); radii = round([X(4)/2, X(3)/2]);
+delete(h);
 close(fig)
 end
