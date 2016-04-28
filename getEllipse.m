@@ -23,7 +23,7 @@ if isempty(coordsMem{r1,r2})
 end
 if compute
     [R_0,C_0]=ndgrid(-r1:r1, -r2:r2);
-    coords = (R_0/r1).^2 + (C_0/r2).^2 <= 1;
+    coords = (R_0/r1).^2 + (C_0/r2).^2 < 1;
     R = R_0(coords);
     C = C_0(coords);
     coordsMem{r1, r2} = coords;

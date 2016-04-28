@@ -21,7 +21,7 @@ BC_current = computeBhattacharyaCoefficient(p_u,q_u);
 c1=y_current(1); %%Y coordinate of y_0(row number)
 c2=y_current(2); %% X coordinate of y_0(column number)
 %window = frame1(c1-r1:c1+r1, c2-r2 : c2+r2); %Rectangular window about current location 
-[selector,r,c] = getEllipse(h_next-1); %Get the ellipse in the next window
+[selector,r,c] = getEllipse(h_next); %Get the ellipse in the next window
 roi_coords=[r + c1, c + c2];      %Region of interest: The points within the ellipse
 
 n_h= size(roi_coords,1);  %The total number of pixels in the ellipse
