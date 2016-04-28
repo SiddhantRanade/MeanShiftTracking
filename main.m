@@ -50,7 +50,7 @@ while ~isDone(videoReader)
     centre = positions(ind,:);
     radii = round(radiiRatios(ind) * radii);
     curFrameM = markEllipse(curFrame, centre, radii);
-%     step(videoWriter, curFrameM);
+    step(videoWriter, curFrameM);
     step(videoPlayer, curFrameM);
 end
 release(videoWriter);

@@ -7,6 +7,8 @@ function distrib = computeDistribution(window)
 
 global nBins;
 
+persistent normalizationConstants
+
 sz = size(window);
 h_r = (sz(1)-1)/2;
 h_c = (sz(2)-1)/2;
@@ -35,5 +37,15 @@ else
             distrib(vals(ii,1), vals(ii,2), vals(ii,3)) + (1-rr(ii)^2-cc(ii)^2);
     end
 end
-distrib = distrib/sum(distrib(:));
+try
+    NC = normalizationConstants(h_r, h_c);
+catch
+    normalizationConstants(h_r,h_c) = sum(distrib(:));
+    NC = normalizationConstants(h_r, h_c);
+end
+if NC == 0
+    normalizationConstants(h_r,h_c) = sum(distrib(:));
+    NC = normalizationConstants(h_r, h_c);
+end
+distrib = distrib/NC;
 end
