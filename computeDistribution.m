@@ -1,9 +1,7 @@
 function distrib = computeDistribution(window)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Arguments : window: the rectangular patch that encloses the ellipse
-%%%
-%%% Outputs : distrib: the distribution
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Arguments : window: the rectangular patch that encloses the ellipse
+%
+% Outputs : distrib: the distribution
 
 global nBins;
 

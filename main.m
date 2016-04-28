@@ -1,8 +1,7 @@
 %% Main
 
-global nBins whiteLevel;
-nBins = int32(16);
-whiteLevel = 1;
+global nBins whiteLevel lineThickness
+nBins = int32(16); whiteLevel = 1; lineThickness = 3;
 
 videoReader = vision.VideoFileReader('vid5.mp4');
 videoWriter = vision.VideoFileWriter('out5.mp4', 'FrameRate', videoReader.info.VideoFrameRate, 'FileFormat', 'MPEG4');

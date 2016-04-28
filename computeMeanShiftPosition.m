@@ -1,20 +1,17 @@
 function shiftedPos = ...
     computeMeanShiftPosition(frame1, q_u, frame2, p_u,y_current,h_current,h_next)
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%% Arguments:
-
-%%% 1)frame1 :current frame
-%%% 2)frame2 :next frame
-%%% 3) q_u   : Distribution of colours centered at the target in frame 1
-%%% 4)p_u    :Distribution of chosen target candidate in the frame 2
-%%% 5)y_current : Target location(center) in the current frame
-%%% 6)h_current: Radii in the current frame
-%%% 7)h_next : Radii in the next frame
-%%%
-%%% Outputs
-%%% shiftedPos : Position of target candidate in the next frame
+%% Arguments:
+%
+% 1)frame1 :current frame
+% 2)frame2 :next frame
+% 3) q_u   : Distribution of colours centered at the target in frame 1
+% 4)p_u    :Distribution of chosen target candidate in the frame 2
+% 5)y_current : Target location(center) in the current frame
+% 6)h_current: Radii in the current frame
+% 7)h_next : Radii in the next frame
+%
+% Outputs
+% shiftedPos : Position of target candidate in the next frame
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 BC_current = computeBhattacharyaCoefficient(p_u,q_u);

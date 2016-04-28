@@ -1,14 +1,12 @@
 function [coords,R,C] = getEllipse(radii)
+%% Arguments: radii: major and minor radii of ellips
+%
+% Output:
+% coords: logical array of size 2*radius(1)+1 x 2*radius(2)+1 with points
+% inside ellipse marked as 1, and those outside marked as 0.
+% R, C: the r,c coordinates of the points inside the ellipse measured
+% w.r.t the centre of the ellipse.
 
-%%% Arguments: radii: major and minor radii of ellips
-%%%
-%%% Output:
-%%% coords: logical array of size 2*radius(1)+1 x 2*radius(2)+1 with points
-%%% inside ellipse marked as 1, and those outside marked as 0.
-%%% R, C: the r,c coordinates of the points inside the ellipse measured
-%%% w.r.t the centre of the ellipse.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 persistent coordsMem RMem CMem
 r1 = radii(1); r2 = radii(2); compute = false;
 try
@@ -29,4 +27,5 @@ if compute
     coordsMem{r1, r2} = coords;
     RMem{r1, r2} = R;
     CMem{r1, r2} = C;
+end
 end
