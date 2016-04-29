@@ -1,9 +1,9 @@
 function shiftedPos = ...
-    computeMeanShiftPosition(frame1, q_u, frame2, p_u,y_current,h_current,h_next)
+    computeMeanShiftPosition(frame1_Q, q_u, frame2_Q, p_u,y_current,h_current,h_next)
 %% Arguments:
 %
-% 1)frame1 :current frame
-% 2)frame2 :next frame
+% 1)frame1: current frame (quantized)
+% 2)frame2: next frame (quantized)
 % 3) q_u   : Distribution of colours centered at the target in frame 1
 % 4)p_u    :Distribution of chosen target candidate in the frame 2
 % 5)y_current : Target location(center) in the current frame
@@ -13,7 +13,6 @@ function shiftedPos = ...
 % Outputs
 % shiftedPos : Position of target candidate in the next frame
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 BC_current = computeBhattacharyaCoefficient(p_u,q_u);
 c1=y_current(1); %%Y coordinate of y_0(row number)
 c2=y_current(2); %% X coordinate of y_0(column number)
@@ -28,8 +27,7 @@ wts=zeros(n_h,1);
 %%Note that the function 'g' is a constant function. Dimensionality of the
 %%vectors is 2 for which value of 'g' is 2/pi.
 for i=1:n_h
-    colour = frame2(roi_coords(i,1),roi_coords(i,2),:); %Get the colour of the pixel
-    index=getBinIndex(colour); %Find the index of the bin(in the histogram) to which the colour belongs
+    index = frame2_Q(roi_coords(i,1),roi_coords(i,2),:); %Get the colour (index) of the pixel
     wts(i)=sqrt(q_u(index(1), index(2), index(3))/p_u(index(1), index(2), index(3)));  %Formula for weights: eqn(25) in the paper
 end
 normalisation_factor = sum(wts); %Normalisation factor given by eqn (26) denominator. Without the constant 2/pi

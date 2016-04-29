@@ -4,6 +4,6 @@ function out = getBinIndex(in)
 % Outputs : distrib: the distribution
 
 global nBins whiteLevel
-out = ceil(in/whiteLevel*double(nBins));
-out(out == 0) = 1;
+out = int8(ceil(in/whiteLevel*double(nBins)));
+out(out == 0) = int8(1);
 end

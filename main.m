@@ -3,8 +3,8 @@
 global nBins whiteLevel lineThickness maxIters
 nBins = int32(16); whiteLevel = 1; lineThickness = 2; maxIters = 20;
 
-videoReader = vision.VideoFileReader('video.mp4');
-videoWriter = vision.VideoFileWriter('output.mp4', 'FrameRate', videoReader.info.VideoFrameRate, 'FileFormat', 'MPEG4');
+videoReader = vision.VideoFileReader('vid7.mp4');
+videoWriter = vision.VideoFileWriter('out7.mp4', 'FrameRate', videoReader.info.VideoFrameRate, 'FileFormat', 'MPEG4');
 curFrame = step(videoReader);
 [centre, radii] = getObjectPosition(curFrame);
 curFrameM = markEllipse(curFrame, centre, radii);
@@ -12,16 +12,18 @@ videoPlayer = vision.DeployableVideoPlayer('Size','Full-screen');
 step(videoWriter, curFrameM);
 step(videoPlayer, curFrameM);
 
-q_u = computeDistribution(curFrame(...
+curFrame_Q = getBinIndex(curFrame);
+q_u = computeDistribution(curFrame_Q(...
     centre(1)-radii(1):centre(1)+radii(1),...
     centre(2)-radii(2):centre(2)+radii(2), :));
 
 kValues=[]; bestCoeffs=[];
-
+tic;
 while ~isDone(videoReader)
-    prevFrame = curFrame;
+    prevFrame_Q = curFrame_Q;
     curFrame = step(videoReader);
-%     q_u = computeDistribution(prevFrame(...
+    curFrame_Q = getBinIndex(curFrame);
+%     q_u = computeDistribution(prevFrame_Q(...
 %         centre(1)-radii(1):centre(1)+radii(1),...
 %         centre(2)-radii(2):centre(2)+radii(2), :));
     radiiRatios = [0.95,1,1.05];
@@ -34,11 +36,11 @@ while ~isDone(videoReader)
         oldpos = [NaN, NaN];
         while(true)
 %             display('Entered while loop');
-            p_u = computeDistribution(curFrame(...
+            p_u = computeDistribution(curFrame_Q(...
                 positions(ii,1)-tmpRadii(1):positions(ii,1)+tmpRadii(1),...
                 positions(ii,2)-tmpRadii(2):positions(ii,2)+tmpRadii(2), :));
             coeffs(ii) = computeBhattacharyaCoefficient(q_u, p_u);
-            pos = computeMeanShiftPosition(prevFrame, q_u, curFrame, p_u, positions(ii,:),radii, tmpRadii);
+            pos = computeMeanShiftPosition(prevFrame_Q, q_u, curFrame_Q, p_u, positions(ii,:),radii, tmpRadii);
 %             display('Computed position');
             if max(abs(pos - positions(ii,:))) < 0.5 || k > maxIters
                 break;
@@ -58,6 +60,7 @@ while ~isDone(videoReader)
     step(videoWriter, curFrameM);
     step(videoPlayer, curFrameM);
 end
+toc;
 release(videoWriter);
 release(videoPlayer);
 figure;
