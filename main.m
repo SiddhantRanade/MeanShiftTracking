@@ -3,8 +3,8 @@
 global nBins whiteLevel lineThickness maxIters
 nBins = int32(16); whiteLevel = 1; lineThickness = 2; maxIters = 20;
 
-videoReader = vision.VideoFileReader('vid7.mp4');
-videoWriter = vision.VideoFileWriter('out7.mp4', 'FrameRate', videoReader.info.VideoFrameRate, 'FileFormat', 'MPEG4');
+videoReader = vision.VideoFileReader('vid6.mp4');
+videoWriter = vision.VideoFileWriter('out6.mp4', 'FrameRate', videoReader.info.VideoFrameRate, 'FileFormat', 'MPEG4');
 curFrame = step(videoReader);
 [centre, radii] = getObjectPosition(curFrame);
 curFrameM = markEllipse(curFrame, centre, radii);
@@ -40,7 +40,7 @@ while ~isDone(videoReader)
                 positions(ii,1)-tmpRadii(1):positions(ii,1)+tmpRadii(1),...
                 positions(ii,2)-tmpRadii(2):positions(ii,2)+tmpRadii(2), :));
             coeffs(ii) = computeBhattacharyaCoefficient(q_u, p_u);
-            pos = computeMeanShiftPosition(prevFrame_Q, q_u, curFrame_Q, p_u, positions(ii,:),radii, tmpRadii);
+            pos = computeMeanShiftPosition( q_u, curFrame_Q, p_u, positions(ii,:), tmpRadii);
 %             display('Computed position');
             if max(abs(pos - positions(ii,:))) < 0.5 || k > maxIters
                 break;
