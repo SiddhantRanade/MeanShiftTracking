@@ -3,7 +3,7 @@ function distrib = computeDistribution(window_Q)
 %
 % Outputs : distrib: the distribution
 
-global nBins;
+global nBins
 
 persistent normalizationConstants
 
@@ -16,7 +16,7 @@ rr = rr/h_r; cc = cc/h_c;
 vals = zeros(n_h, size(window_Q,3));
 for ll = 1:size(window_Q,3)
     win = window_Q(:,:,ll);
-    vals(:,ll)=win(selector);    % Maps [0,whiteLevel] to {1..16}
+    vals(:,ll)=win(selector);
 end
 if(size(window_Q,3) == 1)
     distrib = zeros(nBins,1);

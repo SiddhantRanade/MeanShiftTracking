@@ -22,14 +22,16 @@ roi_coords=[r + c1, c + c2];      %Region of interest: The points within the ell
 
 n_h= size(roi_coords,1);  %The total number of pixels in the ellipse
 
-wts=zeros(n_h,1); 
-
 %%Note that the function 'g' is a constant function. Dimensionality of the
 %%vectors is 2 for which value of 'g' is 2/pi.
-for i=1:n_h
-    index = frame2_Q(roi_coords(i,1),roi_coords(i,2),:); %Get the colour (index) of the pixel
-    wts(i)=sqrt(q_u(index(1), index(2), index(3))/p_u(index(1), index(2), index(3)));  %Formula for weights: eqn(25) in the paper
+vals = zeros(n_h, size(frame2_Q,3));
+for ll = 1:size(frame2_Q,3)
+    win = frame2_Q(c1-h_next(1):c1+h_next(1),c2-h_next(2):c2+h_next(2),ll);
+    vals(:,ll)=win(selector);    % Maps [0,whiteLevel] to {1..16}
 end
+addrs = sub2ind(size(q_u), vals(:,1), vals(:,2), vals(:,3));
+wts = sqrt(q_u(addrs)./p_u(addrs));
+
 normalisation_factor = sum(wts); %Normalisation factor given by eqn (26) denominator. Without the constant 2/pi
 
 assert(normalisation_factor~=0, 'Normalisation factor is zero');
