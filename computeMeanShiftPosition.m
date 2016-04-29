@@ -1,5 +1,5 @@
 function shiftedPos = ...
-    computeMeanShiftPosition(frame1_Q, q_u, frame2_Q, p_u,y_current,h_current,h_next)
+    computeMeanShiftPosition( q_u, frame2_Q, p_u,y_current,h_next)
 %% Arguments:
 %
 % 1)frame1: current frame (quantized)
@@ -13,7 +13,7 @@ function shiftedPos = ...
 % Outputs
 % shiftedPos : Position of target candidate in the next frame
 
-BC_current = computeBhattacharyaCoefficient(p_u,q_u);
+%BC_current = computeBhattacharyaCoefficient(p_u,q_u);
 c1=y_current(1); %%Y coordinate of y_0(row number)
 c2=y_current(2); %% X coordinate of y_0(column number)
 %window = frame1(c1-r1:c1+r1, c2-r2 : c2+r2); %Rectangular window about current location 
